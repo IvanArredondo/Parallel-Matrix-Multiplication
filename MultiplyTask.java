@@ -1,7 +1,9 @@
 package ecse420A1;
 
+import java.util.concurrent.Callable;
+
 public class MultiplyTask implements Runnable {
-	
+
 	double[][] matrixA;
 	double[][] matrixB;
 	double[][] matrixResult;
@@ -10,7 +12,7 @@ public class MultiplyTask implements Runnable {
 
 	public MultiplyTask(double[][] a, double[][] b, double[][] c, int position, int offset) {
 		// TODO Auto-generated constructor stub
-		
+
 		this.matrixA = a;
 		this.matrixB = b;
 		this.matrixResult = c;
@@ -21,17 +23,16 @@ public class MultiplyTask implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
-		for (int i = position; i < position + offset; i++) {
+
+		for (int i = position; i < (position + offset); i++) {
 			for (int j = 0; j < matrixB[0].length; j++) {
 				for (int k = 0; k < matrixA[0].length; k++) {
-					matrixResult[i][j] += matrixA[i][k] * matrixB[k][j];
+					matrixResult[i][j] += matrixA[i][k] * matrixB[k][j];  //doing stuff
 				}
-				
+
 			}
-			
+
 		}
-
 	}
-
 }
+
