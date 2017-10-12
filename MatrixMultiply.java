@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class MatrixMultiply {
 
 	static int numberOfThreads = 4;  //number of threads to split up the parallel multiplication, must be less than dimmensions
-	static int dimensions = 3;//dimensions of matrices to be multiplied, square matrices
+	static int dimensions = 8;//dimensions of matrices to be multiplied, square matrices
 
 	static double sequentialTime;
 	static double parallelTIme;
@@ -36,10 +36,14 @@ public class MatrixMultiply {
 		sequentialTime = finishTime - startTime;
 
 		System.out.println("Sequential time: " + sequentialTime);
+		if(numberOfThreads > dimensions) {
+			System.out.println("Please make number of threads less than dimmensions");
 
-		startTime = System.currentTimeMillis();  //starting the timer
-		showMatrix(parallelMultiplyMatrix(multiplicand, multiplier));  
-		finishTime = System.currentTimeMillis();  //stopping the timer
+		}else {	
+			startTime = System.currentTimeMillis();  //starting the timer
+			showMatrix(parallelMultiplyMatrix(multiplicand, multiplier));	
+			finishTime = System.currentTimeMillis();  //stopping the timer
+		}
 
 		parallelTIme = finishTime - startTime;
 
@@ -90,16 +94,9 @@ public class MatrixMultiply {
 
 		double[][] result  = new double[dimensions][dimensions];
 
-		int lastThread  = 0;  //last thread might have different number of rows to multiply than other threads
 		int numberRowsPerThread = dimensions/numberOfThreads;  //to set the number of rows each thread will multiply
 
-		if(numberRowsPerThread >= 1) {  //this is to handle the case where dimension doesn't divide evenly into thread count
-			lastThread = numberRowsPerThread + dimensions%numberOfThreads;  // the last one will have a bit more work than the rest
-			System.out.println("last thread 1  " + lastThread);
-		}else {
-			lastThread = dimensions%numberOfThreads;  
-			System.out.println("last thread 2  " + lastThread);
-		}
+		int	lastThread = numberRowsPerThread + dimensions%numberOfThreads;  // the last one will have a bit more work than the rest
 
 		System.out.println(" numb of rows per " + numberRowsPerThread + "       " + "last one" + lastThread);
 
