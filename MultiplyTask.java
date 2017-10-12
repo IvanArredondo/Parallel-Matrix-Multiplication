@@ -1,4 +1,12 @@
 package ecse420A1;
+/*
+ECSE 420 - Parallel Computing 
+Dennis Giannacopoulos
+Assignment 1
+Question 1
+Malkolm Alburquenque - 260562740 - malkolm.alburquenque@mail.mcgill.ca
+Ivan Arredondo - 260566638 - ivan.arredondo@mail.mcgill.ca
+*/
 
 import java.util.concurrent.Callable;
 
